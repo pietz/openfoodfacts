@@ -43,6 +43,8 @@ df = df[(df["energy-kcal_100g"] > cal[0]) & (df["energy-kcal_100g"] < cal[1])]
 aller = st.sidebar.selectbox("Allergens", allergens)
 df = df[df["allergens"].str.lower().str.contains(aller)]
 
+f = st.file_uploader("Select Image")
+
 cols = st.beta_columns(n_cols)
 df = df[:n_results].reset_index()
 

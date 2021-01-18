@@ -22,7 +22,7 @@ f = st.file_uploader("Select Image")
 if f is not None:
     img = Image.open(f)
     if img.size[0] > img.size[1]:
-        img = img.rotate(90)
+        img = img.rotate(270)
     # st.header("Uploaded Image")
     # st.image(img)
     id = iris.search(img)[0]

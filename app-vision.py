@@ -3,30 +3,22 @@ import pandas as pd
 from iris import IRIS
 from PIL import Image
 
-iris_path = "iris_210118090818.feather"
-
 
 @st.cache
 # Loading the CSV file takes some time, so we want to cache it
 def load_data():
     # df = pd.read_csv(csv_path)
-    return IRIS(iris_path)
+    return IRIS("iris_210118090818.feather")
 
 
 iris = load_data()
-
-st.title("Rate my Food")
-
-f = st.file_uploader("Select Image")
+st.title("Nutri Scorer")
+f = st.file_uploader("Select Photo")
 
 if f is not None:
     img = Image.open(f)
-    if img.size[0] > img.size[1]:
-        img = img.rotate(270)
-    # st.header("Uploaded Image")
-    # st.image(img)
+    img = img.rotate(270)
     id = iris.search(img)[0]
-    # st.write(iris.meta.loc[id])
     brand = iris.meta.loc[id, "brands"]
     product = iris.meta.loc[id, "product_name"]
     st.header(brand + " - " + product)
@@ -43,3 +35,4 @@ if f is not None:
         Image.open("assets/" + row["nutriscore_grade"] + ".png"),
         use_column_width=True,
     )
+    cols[1].text("The Nutri-Score was estimated and may not be accurate.")

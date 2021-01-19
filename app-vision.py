@@ -35,4 +35,4 @@ if f is not None:
         Image.open("assets/" + row["nutriscore_grade"] + ".png"),
         use_column_width=True,
     )
-    cols[1].text("The Nutri-Score was estimated and may not be accurate.")
+    cols[1].write("The Nutri-Score was estimated and may not be accurate.")
